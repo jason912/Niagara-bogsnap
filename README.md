@@ -1,1 +1,19 @@
 # Niagara-bogsnap
+The bogsnap module in Niagara captures a real-time snapshot of a Niagara station’s program state and saves it as a file. Users can open these .bog files in Workbench to review the operational behavior of programs and parameters during real-time control activities.  
+
+A snapshot includes not only the program logic but also real‑time point values, point statuses (such as OK, alarm, fault, down, stale, etc.), and platform‑service information. A typical application involves the station automatically saving the relevant program logic and real‑time point data the moment an alarm is triggered, and then emailing the resulting .bog file to the Niagara maintenance engineer.  
+
+Compared to an on‑site visit to the JACE to inspect the program, analyzing a .bog file that contains real‑time point data enables the engineer to remotely assess the status and performance of the field‑running program.
+
+This module can currently convert only the contents of the points folder and certain types of network drivers. In our tests on Niagara 4.14, the MQTT network, BACnet network, Modbus network, SNMP network, and OBIX network were all successfully converted into snapshot (.bog) files containing data and status information. The bogsnap also supports converting multiple Niagara station program folders at once via a single module, generating multiple .bog files simultaneously to improve efficiency.
+
+However, conversion testing did not succeed in the following areas:  
+• The Niagara network (password‑protected configurations that prohibit snapshot export)  
+
+• The alarm console, where real‑time alarm information is lost during conversion  
+
+• Historical data and .px files, which cannot be converted to .bog format  
+
+We will continue testing the conversion of other components. If you have specific development requirements, please let us know via email: jason.zhang@gline‑net.com
+
+This module is free to use, share, and deploy in appropriate scenarios, with all decisions and responsibilities resting solely on the user.
