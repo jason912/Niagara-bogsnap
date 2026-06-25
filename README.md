@@ -22,3 +22,9 @@ However, conversion testing did not succeed in the following areas:
 We will continue testing the conversion of other components. If you have specific development requirements, please let us know via email: jason.zhang@gline‑net.com
 
 This module is free to use, share, and deploy in appropriate scenarios, with all decisions and responsibilities resting solely on the user.
+
+## Documentation
+
+| Manual | Description |
+|--------|-------------|
+| [BogSnap User Manual](docs/BogSnap_UserManualEN.pdf) | Complete user manual for the BogSnap module |
