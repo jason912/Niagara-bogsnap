@@ -15,7 +15,7 @@
 | **Speed** | **Milliseconds** (< 100ms) | **Seconds to minutes** |
 | **Real-time data** | ✅ Captures live values in JACE memory | ❌ Only saves persisted data |
 | **CPU impact** | Negligible | Heavy — full station freeze during backup |
-| **Target** | Specific program folders | Entire station |
+| **Target** | Specific program folders (e.g. points/) | Entire station |
 | **Trigger** | On alarm / on demand | Manual or scheduled |
 | **Output** | `.bog` — open in Workbench instantly | `.dist` — requires restore to view |
 
@@ -38,6 +38,11 @@ BogSnap captures the program state in **under 100 milliseconds** — triggered a
 
 The maintenance engineer opens the `.bog` in Workbench remotely — no site visit required.
 
+> ⚠️ **What BogSnap cannot do:**
+> - Cannot save passwords or credentials stored in JACE memory
+> - Cannot capture the entire Niagara network or MQTT network (they contain password-protected configurations)
+> - Best practice: configure BogSnap to target **points/ folders only** under each network driver
+
 ---
 
 ## Quick Start
@@ -51,7 +56,7 @@ The maintenance engineer opens the `.bog` in Workbench remotely — no site visi
 
 # 4. Drag a BogSnap component into your program
 
-# 5. Configure target folders to snapshot
+# 5. Configure target folders (recommended: points/ under each driver)
 
 # 6. Trigger → .bog files exported to your configured folder
 
@@ -62,20 +67,23 @@ The maintenance engineer opens the `.bog` in Workbench remotely — no site visi
 
 ## Tested Networks
 
-| Network | Status |
-|---------|:------:|
-| MQTT Network | ✅ |
-| BACnet Network | ✅ |
-| Modbus Network | ✅ |
-| SNMP Network | ✅ |
-| oBIX Network | ✅ |
-| Niagara Network | ❌ (password-protected, snapshot export blocked) |
+| Network | Points Folder | Entire Network |
+|---------|:------------:|:--------------:|
+| MQTT Network | ✅ Works | ❌ Password-protected configs |
+| BACnet Network | ✅ Works | ✅ Works |
+| Modbus Network | ✅ Works | ✅ Works |
+| SNMP Network | ✅ Works | ✅ Works |
+| oBIX Network | ✅ Works | ✅ Works |
+| Niagara Network | ✅ Works | ❌ Password-protected configs |
+
+**Recommendation:** Point BogSnap at `points/` subfolders only — this captures all real-time data without attempting to access password-protected network configurations.
 
 ### Known Limitations
 
 - **Alarm console** — real-time alarm info is lost during conversion
 - **History data** — cannot be converted to `.bog` format
 - **PX files** — cannot be converted to `.bog` format
+- **Credentials** — passwords and secrets in JACE memory are not exposed
 
 ---
 
